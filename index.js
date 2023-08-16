@@ -234,18 +234,53 @@
 //
 //
 //
-// New API (StartWars)
+// ***New API (StartWars)***
+
+// const API_URL = "https://jsonplaceholder.typicode.com/todos"; // Endpoint
+
+// fetch(API_URL)
+//     .then((res) => res.json())
+//     .then((todos) => {
+//         const ul = document.createElement("ul");
+//         for (let i = 0; i < todos.length; i++) {
+//             const li = document.createElement("li");
+//             li.append(todos[i].title);
+//             ul.append(li);
+//         }
+//         document.body.append(ul);
+//     });
+
+// работа через ***async await***
 
 const API_URL = "https://jsonplaceholder.typicode.com/todos"; // Endpoint
 
-fetch(API_URL)
-    .then((res) => res.json())
-    .then((todos) => {
-        const ul = document.createElement("ul");
-        for (let i = 0; i < todos.length; i++) {
-            const li = document.createElement("li");
-            li.append(todos[i].title);
-            ul.append(li);
-        }
-        document.body.append(ul);
-    });
+// ***then***
+
+// fetch(API_URL)
+//     .then((res) => res.json())
+//  // fetch возвращает responce
+//     .then((todos) => {
+//         const ul = document.createElement("ul");
+
+//         for (let i = 0; i < todos.length; i++) {
+//             const li = document.createElement("li");
+//             li.append(todos[i].title);
+//             ul.append(li);
+//         }
+
+//         document.body.append(ul);
+//     });
+
+// *** async|await ***
+
+async function getTodos() {
+    const res = await fetch(API_URL);
+    // await не дает срабатывать переменную data пока не придет responce - ждут ответа от fetch, он ожидает выполнение запросов
+    // далее запрос API_URL сработал, получили респонс, респонс обработали, и ниже он отображается
+    // если await нет, то нужно ставить then
+    // fetch возвращает responce
+    const data = await res.json();
+
+    console.log(data);
+}
+getTodos();
